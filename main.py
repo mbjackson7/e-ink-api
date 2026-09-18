@@ -4,6 +4,7 @@
 # The Vite dev server proxies /api/* here automatically.
 # In production, serve the built React app as a static mount.
 import sys
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -28,10 +29,18 @@ app.include_router(news.router)
 app.include_router(media.router)
 
 # ── Middleware ────────────────────────────────────────────────────────────
-# Allow CORS from frontend dev server (http://localhost:5173)
+# Comma-separated origins allow both local development and LAN-hosted clients.
+cors_origins = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CORS_ORIGINS", "http://localhost:5173"
+    ).split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
