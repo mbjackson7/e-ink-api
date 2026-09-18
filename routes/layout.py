@@ -5,8 +5,7 @@ from fastapi import APIRouter, HTTPException
 router = APIRouter(prefix="/api/layout", tags=["layout"])
 
 LAYOUTS_DIR = os.environ.get(
-    'LAYOUTS_DIR',
-    os.path.join(os.path.dirname(__file__), '..', 'layouts')
+    "LAYOUTS_DIR", os.path.join(os.path.dirname(__file__), "..", "layouts")
 )
 
 
@@ -22,19 +21,23 @@ def build_layout_response(widgets):
     widget_meta = []
 
     for w in widgets:
-        widget_meta.append({
-            "id": w["id"],
-            "type": w["type"],
-            "title": w["title"],
-            "config": w.get("config", {}),
-        })
+        widget_meta.append(
+            {
+                "id": w["id"],
+                "type": w["type"],
+                "title": w["title"],
+                "config": w.get("config", {}),
+            }
+        )
         for bp in layout_items:
-            layout_items[bp].append({
-                "i": w["id"],
-                "minW": 2,
-                "minH": 1,
-                **w[bp],
-            })
+            layout_items[bp].append(
+                {
+                    "i": w["id"],
+                    "minW": 2,
+                    "minH": 1,
+                    **w[bp],
+                }
+            )
 
     return {"widgets": widget_meta, "layouts": layout_items}
 
@@ -49,9 +52,10 @@ async def get_layout(name: str = "default"):
     if os.path.exists(LAYOUT_PATH):
         with open(LAYOUT_PATH) as f:
             return json.load(f)
-    
+
     # Return empty layout if no file exists
     return {"widgets": [], "layouts": {"lg": [], "md": [], "sm": []}}
+
 
 @router.get("/list")
 async def list_layouts():
@@ -60,9 +64,12 @@ async def list_layouts():
     """
     return {
         "layouts": [
-            f[:-5] for f in os.listdir(LAYOUTS_DIR) if f.endswith(".json") and not f.startswith(".")
+            f[:-5]
+            for f in os.listdir(LAYOUTS_DIR)
+            if f.endswith(".json") and not f.startswith(".")
         ]
     }
+
 
 @router.post("")
 async def save_layout(body: dict, name: str = "default"):
@@ -73,7 +80,7 @@ async def save_layout(body: dict, name: str = "default"):
     """
     LAYOUT_PATH = os.path.join(LAYOUTS_DIR, f"{name}.json")
     try:
-        with open(LAYOUT_PATH, 'w') as f:
+        with open(LAYOUT_PATH, "w") as f:
             json.dump(body, f, indent=2)
         return {"ok": True}
     except Exception as e:

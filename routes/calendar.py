@@ -34,7 +34,9 @@ async def calendar():
             {
                 "id": "3",
                 "title": "Doctor",
-                "start": (now + timedelta(days=1)).replace(hour=10, minute=0).isoformat(),
+                "start": (now + timedelta(days=1))
+                .replace(hour=10, minute=0)
+                .isoformat(),
                 "end": (now + timedelta(days=1)).replace(hour=11, minute=0).isoformat(),
                 "allDay": False,
                 "calendar": "Personal",

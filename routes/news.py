@@ -12,10 +12,30 @@ async def news():
     """
     return {
         "articles": [
-            {"id": "1", "title": "Chicago approves new transit funding package", "source": "Tribune"},
-            {"id": "2", "title": "Lake Michigan water levels stabilize after wet spring", "source": "WGN"},
-            {"id": "3", "title": "City council votes on affordable housing expansion", "source": "Block Club"},
-            {"id": "4", "title": "Metra schedule changes effective next month", "source": "Metra"},
-            {"id": "5", "title": "Local startup raises Series B round", "source": "Crain's"},
+            {
+                "id": "1",
+                "title": "Chicago approves new transit funding package",
+                "source": "Tribune",
+            },
+            {
+                "id": "2",
+                "title": "Lake Michigan water levels stabilize after wet spring",
+                "source": "WGN",
+            },
+            {
+                "id": "3",
+                "title": "City council votes on affordable housing expansion",
+                "source": "Block Club",
+            },
+            {
+                "id": "4",
+                "title": "Metra schedule changes effective next month",
+                "source": "Metra",
+            },
+            {
+                "id": "5",
+                "title": "Local startup raises Series B round",
+                "source": "Crain's",
+            },
         ]
     }

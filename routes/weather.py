@@ -20,11 +20,41 @@ async def weather():
             "wind_speed": 11,
         },
         "forecast": [
-            {"date": "Mon", "high": 61, "low": 44, "condition": "Sunny",         "precip_chance": 5},
-            {"date": "Tue", "high": 55, "low": 41, "condition": "Cloudy",        "precip_chance": 30},
-            {"date": "Wed", "high": 49, "low": 38, "condition": "Rain",          "precip_chance": 80},
-            {"date": "Thu", "high": 52, "low": 40, "condition": "Partly cloudy", "precip_chance": 20},
-            {"date": "Fri", "high": 60, "low": 43, "condition": "Sunny",         "precip_chance": 5},
+            {
+                "date": "Mon",
+                "high": 61,
+                "low": 44,
+                "condition": "Sunny",
+                "precip_chance": 5,
+            },
+            {
+                "date": "Tue",
+                "high": 55,
+                "low": 41,
+                "condition": "Cloudy",
+                "precip_chance": 30,
+            },
+            {
+                "date": "Wed",
+                "high": 49,
+                "low": 38,
+                "condition": "Rain",
+                "precip_chance": 80,
+            },
+            {
+                "date": "Thu",
+                "high": 52,
+                "low": 40,
+                "condition": "Partly cloudy",
+                "precip_chance": 20,
+            },
+            {
+                "date": "Fri",
+                "high": 60,
+                "low": 43,
+                "condition": "Sunny",
+                "precip_chance": 5,
+            },
         ],
     }
 
@@ -40,7 +70,9 @@ async def weather_ha():
     return {
         "current": {
             "temp": data["attributes"]["temperature"],
-            "feels_like": data["attributes"].get("apparent_temperature", data["attributes"]["temperature"]),
+            "feels_like": data["attributes"].get(
+                "apparent_temperature", data["attributes"]["temperature"]
+            ),
             "condition": data["state"].title(),
             "humidity": data["attributes"]["humidity"],
             "wind_speed": data["attributes"]["wind_speed"],

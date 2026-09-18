@@ -8,7 +8,6 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from playwright.async_api import async_playwright
 import uvicorn
 
 # Ensure data_mock is properly recognized as a package for relative imports
@@ -27,7 +26,7 @@ app.include_router(climate.router)
 app.include_router(calendar.router)
 app.include_router(news.router)
 app.include_router(media.router)
- 
+
 # ── Middleware ────────────────────────────────────────────────────────────
 # Allow CORS from frontend dev server (http://localhost:5173)
 app.add_middleware(
@@ -35,7 +34,7 @@ app.add_middleware(
     allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 

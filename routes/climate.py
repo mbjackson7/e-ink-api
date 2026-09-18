@@ -28,7 +28,10 @@ async def climate_ha():
     data = await get_ha_state(ENTITY_ID)
     return {
         "fields": {
-            "temperature": {"value": data["attributes"]["current_temperature"], "unit": "°F"},
+            "temperature": {
+                "value": data["attributes"]["current_temperature"],
+                "unit": "°F",
+            },
             "humidity": {"value": data["attributes"].get("humidity"), "unit": "%"},
             "state": {"value": data["state"], "unit": ""},
         }
