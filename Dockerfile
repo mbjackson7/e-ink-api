@@ -7,11 +7,10 @@ ENV UV_COMPILE_BYTECODE=1 \
 	PATH="/app/.venv/bin:$PATH" \
 	PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
-COPY pyproject.toml .
-RUN uv sync --no-install-project --no-dev
+COPY pyproject.toml uv.lock ./
+RUN uv sync --locked --no-install-project --no-dev
 
 COPY . .
-RUN uv sync --no-dev
 
 # Install Chromium and the OS libraries required by the Playwright endpoint.
 RUN uv run playwright install --with-deps chromium
